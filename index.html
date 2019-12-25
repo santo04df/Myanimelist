@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My anime list</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="style.css">
+  <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+    <script src="/__/firebase/7.6.1/firebase-analytics.js"></script>
+<script src="/__/firebase/7.6.1/firebase-firestore.js"></script>
+
+    <script src="./vue.min.js"></script>
+</head>
+<body >
+    <div id="app">
+        <h1 style="font-size: 30px;color:black;font-weight: 500;">My anime list</h1>
+        <div class="grid">
+
+            <div class="col-40" style="background-color: #c2c2c2;height: 300px;">
+                <h3>Aggiungi</h1>
+                    <form v-on:submit.prevent="nope">
+                    <input type="text" placeholder="Inserisci nome " v-model="input.name">
+                    <input type="text" name="" id="category">
+                    <select name="" id="" v-model="input.status">
+                        <option  value="" disabled>Seleziona</option>
+                        <option value="visto">Visto</option>
+                        <option value="watching">Lo sto guardando</option>
+                        <option value="plain">In lista</option>
+                    </select>
+                    <!--<input type="text" placeholder="Inserisci url immagine" v-model="input.img">-->
+                    <input type="file" name="" id="upload">
+                    <img id="myImage" :src="input.img" alt="" style="height:90px;width: 60px;">
+                    
+                    <button style="background:white;border-radius:40px;padding:4px" v-on:click="submit">Aggiungi</button>
+                    </form>
+            </div>
+            <div class="col-10" style="background-color: white;"></div>
+            <div class="col-10" style="background-color: white;"></div>
+            <div class="col-40" style="background-color: #c2c2c2">
+                <h3>Lista</h3>
+                <div><button onclick="see(0);">Tutti</button ><button class="visto"onclick="see(1);">Visti</button><button class="watching"onclick="see(2);">Lo sto guardando</button><button class="plain"onclick="see(3);">In lista</button></div>
+                <ul style="list-style: none;">
+                    <li style="display:flex"  v-for="anime in animelist"  :class="'status '+anime.data.status">
+                        <img style="height:90px;width: 60px;" :src="anime.data.img" alt="">
+                        <p style="margin-top:auto;margin-left: 10px;">{{anime.data.name}}</p>
+                        <p style="margin-top: auto;margin-left: auto;color: red;font-size: 20px;font-weight: 800;"v-on:click="delete_anime(anime.id)">X</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <script src="/__/firebase/init.js"></script>
+
+        <script src="./theme.js"></script>
+
+</body>
+</html>
